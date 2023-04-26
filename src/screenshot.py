@@ -23,13 +23,13 @@ img = Image.frombytes("RGB", screenshot.size, screenshot.raw, "raw", "BGRX")
 # Save the screenshot to disk
 buffer = io.BytesIO()
 img.save(buffer, format="PNG")
-with open("screenshot.png", "wb") as f:
+with open("../screenshot.png", "wb") as f:
     f.write(buffer.getvalue())
 
 # Upload the screenshot to ImgBB
 url = "https://api.imgbb.com/1/upload"
 payload = {"key": IMGBB_API_KEY}
-files = {"image": open("screenshot.png", "rb")}
+files = {"image": open("../screenshot.png", "rb")}
 response = requests.post(url, payload, files=files)
 
 # Parse the JSON response to get the URL of the uploaded image
