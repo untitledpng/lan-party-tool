@@ -88,16 +88,19 @@ def send_discord_screenshot(image_url):
                     "type": "rich",
                     "title": "",
                     "description": f"{LOCAL_USER} saved a clip!",
-                    "color": "00d9ff",
+                    "color": 7774208,
                     "thumbnail": {
                         "url": LOCAL_USER_IMAGE,
                         "height": 0,
                         "width": 0
                     },
                     "image": {
-                      "url": image_url,
-                      "height": 0,
-                      "width": 0
+                        "url": image_url,
+                        "height": 0,
+                        "width": 0
+                    },
+                    "author": {
+                        "name": LOCAL_USER
                     }
                 }
             ]
