@@ -14,6 +14,7 @@ PUSHER_CLUSTER = os.getenv('PUSHER_CLUSTER')
 PUSHER_WEBSOCKET_URL = f'wss://ws-{PUSHER_CLUSTER}.pusher.com/app/{PUSHER_APP_KEY}?client=js&version=7.0.3&protocol=5'
 LOCAL_USER = os.getenv('LOCAL_USER')
 NVIDIA_KEY_COMBO = os.getenv('NVIDIA_KEY_COMBO')
+DISCORD_WEBHOOK = os.getenv('DISCORD_WEBHOOK')
 
 PING_HISTORY = []
 
@@ -54,8 +55,10 @@ def validate_pings():
         index = index + 1
 
 def send_discord_offline(player):
+    global DISCORD_WEBHOOK
+
     requests.post(
-        "https://discord.com/api/webhooks/1100510662888804373/Q4KAm6Iy8DSjwr2YAOtMGYk0EfyDC44jiPGANfX9BNhb667EobF_L-bjYQbcTlVPH2-m",
+        DISCORD_WEBHOOK,
         data=json.dumps({
             "embeds": [
                 {
@@ -83,8 +86,10 @@ def send_discord_offline(player):
     )
 
 def send_discord_online(player):
+    global DISCORD_WEBHOOK
+
     requests.post(
-        "https://discord.com/api/webhooks/1100510662888804373/Q4KAm6Iy8DSjwr2YAOtMGYk0EfyDC44jiPGANfX9BNhb667EobF_L-bjYQbcTlVPH2-m",
+        DISCORD_WEBHOOK,
         data=json.dumps({
             "embeds": [
                 {
@@ -109,8 +114,10 @@ def send_discord_online(player):
     )
 
 def send_discord_message(message):
+    global DISCORD_WEBHOOK
+
     requests.post(
-        "https://discord.com/api/webhooks/1100510662888804373/Q4KAm6Iy8DSjwr2YAOtMGYk0EfyDC44jiPGANfX9BNhb667EobF_L-bjYQbcTlVPH2-m",
+        DISCORD_WEBHOOK,
         data=json.dumps({
             "content": message
         }),
@@ -120,8 +127,10 @@ def send_discord_message(message):
     )
 
 def send_discord_embed(title):
+    global DISCORD_WEBHOOK
+
     requests.post(
-        "https://discord.com/api/webhooks/1100510662888804373/Q4KAm6Iy8DSjwr2YAOtMGYk0EfyDC44jiPGANfX9BNhb667EobF_L-bjYQbcTlVPH2-m",
+        DISCORD_WEBHOOK,
         data=json.dumps({
             "embeds": [
                 {
