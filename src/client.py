@@ -21,7 +21,7 @@ def save_replay(name):
     now = datetime.datetime.now()
     formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")
     print(f'[{formatted_time}] Replay saved by {name}!')
-    os.touch(LOCK_FILE)
+    open(LOCK_FILE, 'a').close()
     keyboard.press_and_release(NVIDIA_KEY_COMBO)
 
 async def client():
