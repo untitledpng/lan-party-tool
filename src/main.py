@@ -23,7 +23,7 @@ def run_heartbeat_server():
 thread1 = threading.Thread(target=run_client)
 thread2 = threading.Thread(target=run_server)
 thread3 = threading.Thread(target=run_heartbeat_ping)
-thread4 = threading.Thread(target=run_heartbeat_server())
+thread4 = threading.Thread(target=run_heartbeat_server)
 
 # Start both threads
 thread1.start()
