@@ -3,6 +3,11 @@ from PIL import Image
 import io
 import requests
 import json
+import os
+
+load_dotenv()
+
+IMGBB_API_KEY = os.getenv('IMGBB_API_KEY')
 
 # Take a fullscreen screenshot
 with mss.mss() as sct:
@@ -23,7 +28,7 @@ with open("screenshot.png", "wb") as f:
 
 # Upload the screenshot to ImgBB
 url = "https://api.imgbb.com/1/upload"
-payload = {"key": "5d9ea6d179e4f93e8f506c7cb0db55d3"}
+payload = {"key": IMGBB_API_KEY}
 files = {"image": open("screenshot.png", "rb")}
 response = requests.post(url, payload, files=files)
 
