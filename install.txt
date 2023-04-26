@@ -1,1 +1,1 @@
-pip install python-dotenv keyboard pusher websockets colored mss pillow termcolor
+pip install python-dotenv keyboard pusher websockets colored mss termcolor
