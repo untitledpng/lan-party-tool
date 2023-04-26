@@ -46,12 +46,12 @@ def validate_pings():
 
     index = 0
     for player in PING_HISTORY:
-        if not player["is_notified"] and player["last_ping"] < datetime.datetime.now() - datetime.timedelta(seconds=25):
+        if not player["is_notified"] and player["last_ping"] < datetime.datetime.now() - datetime.timedelta(seconds=13):
             print(f"Player {player['name']} went offline!")
             send_discord_offline(player)
             PING_HISTORY[index]["is_notified"] = True
 
-        elif player["is_notified"] and player["last_ping"] >= datetime.datetime.now() - datetime.timedelta(seconds=25):
+        elif player["is_notified"] and player["last_ping"] >= datetime.datetime.now() - datetime.timedelta(seconds=13):
             print(f"Player {player['name']} is back!")
             send_discord_online(player)
             PING_HISTORY[index]["is_notified"] = False
