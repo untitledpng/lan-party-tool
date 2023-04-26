@@ -23,7 +23,7 @@ def run_heartbeat_server():
 def run_free_file_sync():
     if os.path.exists('./SyncSettings.ffs_batch'):
         while True:
-            subprocess.call(['./SyncSettings.ffs_batch'])
+            subprocess.call('SyncSettings.ffs_batch', shell=True)
             time.sleep(30*60)
     else:
         print('NO SyncSettings.ffs_batch FILE FOUND!')
