@@ -28,12 +28,16 @@ def handle_ping(name, image):
             player_found = True
 
     if not player_found:
-        PING_HISTORY.append({
+        player = {
             "name": name,
             "image": image,
             "last_ping": datetime.datetime.now(),
             "is_notified": False
-        })
+        }
+
+        print(f"Player {player['name']} joined!")
+        PING_HISTORY.append(player)
+        send_discord_joined(player)
 
     validate_pings()
 
@@ -42,12 +46,12 @@ def validate_pings():
 
     index = 0
     for player in PING_HISTORY:
-        if not player["is_notified"] and player["last_ping"] < datetime.datetime.now() - datetime.timedelta(minutes=1):
+        if not player["is_notified"] and player["last_ping"] < datetime.datetime.now() - datetime.timedelta(seconds=25):
             print(f"Player {player['name']} went offline!")
             send_discord_offline(player)
             PING_HISTORY[index]["is_notified"] = True
 
-        elif player["is_notified"] and player["last_ping"] >= datetime.datetime.now() - datetime.timedelta(minutes=1):
+        elif player["is_notified"] and player["last_ping"] >= datetime.datetime.now() - datetime.timedelta(seconds=25):
             print(f"Player {player['name']} is back!")
             send_discord_online(player)
             PING_HISTORY[index]["is_notified"] = False
@@ -96,6 +100,34 @@ def send_discord_online(player):
                     "type": "rich",
                     "title": "",
                     "description": f"{player['name']} is back online!",
+                    "color": 7774208,
+                    "thumbnail": {
+                        "url": player["image"],
+                        "height": 0,
+                        "width": 0
+                    },
+                    "author": {
+                        "name": player["name"]
+                    }
+                }
+            ]
+        }),
+        headers={
+            "Content-Type": "application/json"
+        }
+    )
+
+def send_discord_joined(player):
+    global DISCORD_WEBHOOK
+
+    requests.post(
+        DISCORD_WEBHOOK,
+        data=json.dumps({
+            "embeds": [
+                {
+                    "type": "rich",
+                    "title": "",
+                    "description": f"{player['name']} joined!",
                     "color": 7774208,
                     "thumbnail": {
                         "url": player["image"],
