@@ -2,3 +2,5 @@
 
 cd src
 python self_update.py
+
+pause
