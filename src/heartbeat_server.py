@@ -188,7 +188,7 @@ async def client():
             }))
 
             print('Heartbeat server is running...')
-            send_discord_embed("New session has started!")
+            # send_discord_embed("New session has started!")
 
             async for message in websocket:
                 data = json.loads(message)
