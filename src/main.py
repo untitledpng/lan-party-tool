@@ -9,21 +9,44 @@ load_dotenv()
 python_executable = os.getenv('PYTHON_EXECUTABLE')
 
 def run_client():
-    subprocess.call([python_executable, 'client.py'])
+    while True:
+        try:
+            subprocess.call([python_executable, 'client.py'])
+        except subprocess.CalledProcessError:
+            print('client.py subprocess crashed. Restarting...')
+        time.sleep(1)
 
 def run_server():
-    subprocess.call([python_executable, 'server.py'])
+    while True:
+        try:
+            subprocess.call([python_executable, 'server.py'])
+        except subprocess.CalledProcessError:
+            print('server.py subprocess crashed. Restarting...')
+        time.sleep(1)
 
 def run_heartbeat_ping():
-    subprocess.call([python_executable, 'heartbeat_ping.py'])
+    while True:
+        try:
+            subprocess.call([python_executable, 'heartbeat_ping.py'])
+        except subprocess.CalledProcessError:
+            print('heartbeat_ping.py subprocess crashed. Restarting...')
+        time.sleep(1)
 
 def run_heartbeat_server():
-    subprocess.call([python_executable, 'heartbeat_server.py'])
+    while True:
+        try:
+            subprocess.call([python_executable, 'heartbeat_server.py'])
+        except subprocess.CalledProcessError:
+            print('heartbeat_server.py subprocess crashed. Restarting...')
+        time.sleep(1)
 
 def run_free_file_sync():
     if os.path.exists('./SyncSettings.ffs_batch'):
         while True:
-            subprocess.call('SyncSettings.ffs_batch', shell=True)
+            try:
+                subprocess.call('SyncSettings.ffs_batch', shell=True)
+            except subprocess.CalledProcessError:
+                print('SyncSettings.ffs_batch subprocess crashed. Restarting...')
             time.sleep(30*60)
     else:
         print('NO SyncSettings.ffs_batch FILE FOUND!')
