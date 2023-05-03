@@ -1,5 +1,5 @@
 @echo off
 
 cd src
-python copy.py
+python copy_script.py
 python main.py
