@@ -1,1 +1,1 @@
-python-dotenv keyboard pusher websockets colored mss termcolor
+python-dotenv keyboard pusher websockets colored mss termcolor pywin32
